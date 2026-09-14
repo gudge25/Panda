@@ -2298,6 +2298,19 @@
 
     start() {
       this.state = 'RUNNING';
+      // Reset all per-run state so every new run begins at INITIAL_SPEED,
+      // regardless of how the player reached the start screen.
+      this.score = 0;
+      this.distance = 0;
+      this.speed = INITIAL_SPEED;
+      this.lastMilestone = 0;
+      this.panda.reset();
+      this.obstacles.reset();
+      this.particles.reset();
+      this.updateScoreDisplay();
+      this.updateShieldBadge();
+      this.updateEatingBadge();
+
       this.startOverlay.classList.remove('active');
       this.gameOverOverlay.classList.remove('active');
       this.pauseOverlay.classList.remove('active');
@@ -2308,16 +2321,6 @@
     }
 
     restart() {
-      this.score = 0;
-      this.distance = 0;
-      this.speed = INITIAL_SPEED;
-      this.lastMilestone = 0;
-      this.panda.reset();
-      this.obstacles.reset();
-      this.particles.reset();
-      this.updateScoreDisplay();
-      this.updateShieldBadge();
-
       this.scoreDisplay.classList.remove('score-flash');
       this.newRecordAlert.style.display = 'none';
       this.start();
